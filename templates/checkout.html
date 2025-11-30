@@ -1,0 +1,414 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout - Puffelax{% endblock %}
+
+{% block content %}
+<section class="checkout-section" style="padding-top: 150px; padding-bottom: 100px;">
+    <div class="container">
+        <h2 class="section-title" data-i18n="checkout_title">Checkout</h2>
+
+        <div class="checkout-container">
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h3 data-i18n="your_order">Your Order</h3>
+                <div id="checkout-items" class="checkout-items">
+                    <!-- Items will be injected here via JS -->
+                    <p class="empty-cart-msg" data-i18n="empty_cart">Your cart is empty.</p>
+                </div>
+                <div class="checkout-total">
+                    <span data-i18n="total">Total:</span>
+                    <span id="checkout-total-price">$0.00</span>
+                </div>
+            </div>
+
+            <!-- Checkout Form -->
+            <div class="checkout-form-container">
+                <h3 data-i18n="shipping_details">Shipping Details</h3>
+                <form id="checkout-form" onsubmit="processCheckout(event)">
+                    <div class="form-group">
+                        <label for="name" data-i18n="lbl_name">Full Name</label>
+                        <input type="text" id="name" required placeholder="John Doe" data-i18n="lbl_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-i18n="lbl_email">Email</label>
+                        <input type="email" id="email" required placeholder="john@example.com" data-i18n="lbl_email">
+                    </div>
+                    <div class="form-group">
+                        <label for="address" data-i18n="lbl_addr">Address</label>
+                        <input type="text" id="address" required placeholder="123 Vape St" data-i18n="lbl_addr">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city" data-i18n="lbl_city">City</label>
+                            <input type="text" id="city" required data-i18n="lbl_city">
+                        </div>
+                        <div class="form-group">
+                            <label for="zip" data-i18n="lbl_zip">Zip Code</label>
+                            <input type="text" id="zip" required data-i18n="lbl_zip">
+                        </div>
+                    </div>
+
+
+                    <h3 data-i18n="payment_method">Payment Method</h3>
+                    <div class="payment-methods">
+                        <div class="payment-method selected" data-method="card" onclick="selectPaymentMethod('card')">
+                            <i class="far fa-credit-card"></i> <span data-i18n="pay_card">Credit Card</span>
+                        </div>
+                        <div class="payment-method" data-method="paypal" onclick="selectPaymentMethod('paypal')">
+                            <i class="fab fa-paypal"></i> <span data-i18n="pay_paypal">PayPal</span>
+                        </div>
+                        <div class="payment-method" data-method="applepay" onclick="selectPaymentMethod('applepay')">
+                            <i class="fab fa-apple"></i> <span data-i18n="pay_apple">Apple Pay</span>
+                        </div>
+                        <div class="payment-method" data-method="googlepay" onclick="selectPaymentMethod('googlepay')">
+                            <i class="fab fa-google"></i> <span data-i18n="pay_google">Google Pay</span>
+                        </div>
+                    </div>
+
+                    <!-- Card Form (shown by default) -->
+                    <div id="card-form" class="payment-form">
+                        <div class="form-group">
+                            <label for="card" data-i18n="lbl_card">Card Number</label>
+                            <input type="text" id="card" placeholder="0000 0000 0000 0000" data-i18n="lbl_card">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiry" data-i18n="lbl_expiry">Expiry</label>
+                                <input type="text" id="expiry" placeholder="MM/YY" data-i18n="lbl_expiry">
+                            </div>
+                            <div class="form-group">
+                                <label for="cvc" data-i18n="lbl_cvc">CVC</label>
+                                <input type="text" id="cvc" placeholder="123" data-i18n="lbl_cvc">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Digital Wallet Buttons -->
+                    <div id="digital-wallet-buttons" style="display: none;">
+                        <button type="button" id="apple-pay-btn" class="btn btn-wallet apple-pay"
+                            onclick="processDigitalPayment('Apple Pay')" style="display: none;">
+                            <i class="fab fa-apple"></i> <span data-i18n="pay_apple">Pay with Apple Pay</span>
+                        </button>
+                        <button type="button" id="google-pay-btn" class="btn btn-wallet google-pay"
+                            onclick="processDigitalPayment('Google Pay')" style="display: none;">
+                            <i class="fab fa-google"></i> <span data-i18n="pay_google">Pay with Google Pay</span>
+                        </button>
+                        <button type="button" id="paypal-btn" class="btn btn-wallet paypal"
+                            onclick="processDigitalPayment('PayPal')" style="display: none;">
+                            <i class="fab fa-paypal"></i> <span data-i18n="pay_paypal">Pay with PayPal</span>
+                        </button>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block" id="submit-btn"
+                        data-i18n="btn_complete">Complete Purchase</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .checkout-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+    }
+
+    .order-summary,
+    .checkout-form-container {
+        background: var(--card-bg);
+        padding: 30px;
+        border-radius: 20px;
+        border: 1px solid var(--glass-border);
+    }
+
+    .checkout-items {
+        margin-bottom: 30px;
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .checkout-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid var(--glass-border);
+    }
+
+    .checkout-item-info h4 {
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+
+    .checkout-item-price {
+        color: var(--accent-primary);
+        font-weight: bold;
+    }
+
+    .remove-btn {
+        background: transparent;
+        border: none;
+        color: #ff4d4d;
+        cursor: pointer;
+        font-size: 1.1rem;
+        transition: var(--transition);
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .remove-btn:hover {
+        background: rgba(255, 77, 77, 0.1);
+        transform: scale(1.1);
+    }
+
+    .checkout-total {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.5rem;
+        font-weight: bold;
+        padding-top: 20px;
+        border-top: 2px solid var(--glass-border);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #aaa;
+        font-size: 0.9rem;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--glass-border);
+        border-radius: 8px;
+        color: #fff;
+        font-family: inherit;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: var(--accent-primary);
+    }
+
+    .payment-methods {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .payment-method {
+        padding: 15px;
+        border: 1px solid var(--glass-border);
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: var(--transition);
+        font-size: 0.9rem;
+    }
+
+    .payment-method.selected,
+    .payment-method:hover {
+        border-color: var(--accent-primary);
+        background: rgba(0, 243, 255, 0.1);
+    }
+
+    .payment-method i {
+        margin-right: 5px;
+    }
+
+    .btn-block {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .btn-wallet {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 15px;
+        font-size: 1rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .btn-wallet i {
+        margin-right: 10px;
+    }
+
+    .apple-pay {
+        background: #000;
+        color: #fff;
+    }
+
+    .apple-pay:hover {
+        background: #1a1a1a;
+        transform: translateY(-2px);
+    }
+
+    .google-pay {
+        background: #fff;
+        color: #000;
+    }
+
+    .google-pay:hover {
+        background: #f0f0f0;
+        transform: translateY(-2px);
+    }
+
+    .paypal {
+        background: #0070ba;
+        color: #fff;
+    }
+
+    .paypal:hover {
+        background: #005ea6;
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+        .checkout-container {
+            grid-template-columns: 1fr;
+        }
+
+        .payment-methods {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<script>
+    let selectedPaymentMethod = 'card';
+
+    function selectPaymentMethod(method) {
+        selectedPaymentMethod = method;
+
+        // Update UI
+        document.querySelectorAll('.payment-method').forEach(el => {
+            el.classList.remove('selected');
+        });
+        document.querySelector(`[data-method="${method}"]`).classList.add('selected');
+
+        // Show/hide appropriate forms
+        const cardForm = document.getElementById('card-form');
+        const walletButtons = document.getElementById('digital-wallet-buttons');
+        const submitBtn = document.getElementById('submit-btn');
+
+        if (method === 'card') {
+            cardForm.style.display = 'block';
+            walletButtons.style.display = 'none';
+            submitBtn.style.display = 'block';
+        } else {
+            cardForm.style.display = 'none';
+            walletButtons.style.display = 'block';
+            submitBtn.style.display = 'none';
+
+            // Show specific wallet button
+            document.getElementById('apple-pay-btn').style.display = method === 'applepay' ? 'block' : 'none';
+            document.getElementById('google-pay-btn').style.display = method === 'googlepay' ? 'block' : 'none';
+            document.getElementById('paypal-btn').style.display = method === 'paypal' ? 'block' : 'none';
+        }
+    }
+
+    function processDigitalPayment(method) {
+        const cart = JSON.parse(localStorage.getItem('puffelaxCart')) || [];
+        if (cart.length === 0) {
+            alert('Your cart is empty!');
+            return;
+        }
+
+        // Simulate payment processing
+        const total = cart.reduce((sum, item) => {
+            return sum + parseFloat(item.price.replace('$', ''));
+        }, 0);
+
+        // In a real app, you would integrate with actual payment APIs here
+        alert(`Processing payment of $${total.toFixed(2)} via ${method}...\n\nPayment successful! Thank you for your purchase.`);
+
+        localStorage.removeItem('puffelaxCart');
+        window.location.href = "{{ url_for('home') }}";
+    }
+
+    function loadCheckoutItems() {
+        const cart = JSON.parse(localStorage.getItem('puffelaxCart')) || [];
+        const container = document.getElementById('checkout-items');
+        const totalEl = document.getElementById('checkout-total-price');
+
+        container.innerHTML = '';
+        let total = 0;
+
+        if (cart.length === 0) {
+            container.innerHTML = '<p class="empty-cart-msg">Your cart is empty.</p>';
+            totalEl.textContent = '$0.00';
+            return;
+        }
+
+        cart.forEach((item, index) => {
+            const price = parseFloat(item.price.replace('$', ''));
+            total += price;
+
+            const itemEl = document.createElement('div');
+            itemEl.className = 'checkout-item';
+            itemEl.innerHTML = `
+                <div class="checkout-item-info">
+                    <h4>${item.name}</h4>
+                    <span class="checkout-item-price">${item.price}</span>
+                </div>
+                <button class="remove-btn" onclick="removeItem(${index})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            container.appendChild(itemEl);
+        });
+
+        totalEl.textContent = '$' + total.toFixed(2);
+    }
+
+    function removeItem(index) {
+        const cart = JSON.parse(localStorage.getItem('puffelaxCart')) || [];
+        cart.splice(index, 1);
+        localStorage.setItem('puffelaxCart', JSON.stringify(cart));
+        loadCheckoutItems();
+        updateCartUI(); // Update the header cart count
+        showToast('Item Removed', 'The item has been removed from your cart.');
+    }
+
+    function processCheckout(e) {
+        e.preventDefault();
+
+        const cart = JSON.parse(localStorage.getItem('puffelaxCart')) || [];
+        if (cart.length === 0) {
+            alert('Your cart is empty!');
+            return;
+        }
+
+        const total = cart.reduce((sum, item) => {
+            return sum + parseFloat(item.price.replace('$', ''));
+        }, 0);
+
+        alert(`Payment of $${total.toFixed(2)} processed successfully!\n\nThank you for your purchase.`);
+        localStorage.removeItem('puffelaxCart');
+        window.location.href = "{{ url_for('home') }}";
+    }
+
+    window.onload = () => {
+        loadCheckoutItems();
+        selectPaymentMethod('card'); // Initialize with card selected
+    };
+</script>
+{% endblock %}

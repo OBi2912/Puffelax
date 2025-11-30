@@ -1,0 +1,394 @@
+{% extends 'base.html' %}
+
+{% block title %}Shop - Puffelax{% endblock %}
+
+{% block content %}
+<section class="products" style="padding-top: 150px;">
+    <div class="container">
+        <h2 class="section-title" data-i18n="sect_prem">Premium Collection</h2>
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card"
+                onclick="openModal('vape1', 'Pod System', 'Cyber Vape X1', '$49.99', 'Experience the future with the Cyber Vape X1. Featuring a sleek metallic finish and advanced coil technology for pure flavor.', 'Battery: 1000mAh', 'Capacity: 2ml')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape1.png') }}" alt="Cyber Vape X1" id="img-vape1">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Pod System</span>
+                    <h3 class="product-title">Cyber Vape X1</h3>
+                    <span class="product-price">$49.99</span>
+                    <button class="add-to-cart">View Details</button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card"
+                onclick="openModal('vape2', 'Disposable', 'Fruit Blast 5000', '$19.99', 'Explosion of tropical fruits in every puff. The Fruit Blast 5000 offers up to 5000 puffs of consistent, intense flavor.', 'Puffs: 5000', 'Nicotine: 5%')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape2.png') }}" alt="Fruit Blast Disposable"
+                        id="img-vape2">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Disposable</span>
+                    <h3 class="product-title">Fruit Blast 5000</h3>
+                    <span class="product-price">$19.99</span>
+                    <button class="add-to-cart">View Details</button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card"
+                onclick="openModal('vape3', 'Box Mod', 'Titan Mod 200W', '$89.99', 'Power meets durability. The Titan Mod 200W is built for cloud chasers who demand the best performance and rugged build quality.', 'Power: 5-200W', 'Battery: Dual 18650')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape3.png') }}" alt="Titan Mod 200W" id="img-vape3">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Box Mod</span>
+                    <h3 class="product-title">Titan Mod 200W</h3>
+                    <span class="product-price">$89.99</span>
+                    <button class="add-to-cart">View Details</button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card"
+                onclick="openModal('vape4', 'Disposable', 'Pastel Dream', '$24.99', 'Soft, sweet, and satisfying. Pastel Dream brings a dessert-inspired profile with notes of vanilla and strawberry cream.', 'Puffs: 6000', 'Nicotine: 3%')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape4.png') }}" alt="Pastel Dream" id="img-vape4">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Disposable</span>
+                    <h3 class="product-title">Pastel Dream</h3>
+                    <span class="product-price">$24.99</span>
+                    <button class="add-to-cart">View Details</button>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card"
+                onclick="openModal('vape5', 'Luxury Mod', 'Gold Edition Pro', '$129.99', 'The ultimate statement piece. 24k gold plating accents meet high-end chipset performance. Limited edition.', 'Material: Zinc Alloy/Gold', 'Chipset: DNA 250C')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape5.png') }}" alt="Gold Edition Pro"
+                        id="img-vape5">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Luxury Mod</span>
+                    <h3 class="product-title">Gold Edition Pro</h3>
+                    <span class="product-price">$129.99</span>
+                    <button class="add-to-cart">View Details</button>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card"
+                onclick="openModal('vape6', 'Pod System', 'Cyber Clear', '$54.99', 'See the technology inside. Transparent casing reveals the advanced circuitry while neon LEDs light up your vape session.', 'Lighting: RGB LED', 'Coils: Mesh 0.8ohm')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape6.png') }}" alt="Cyber Clear" id="img-vape6">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Pod System</span>
+                    <h3 class="product-title">Cyber Clear</h3>
+                    <span class="product-price">$54.99</span>
+                    <button class="add-to-cart">View Details</button>
+                </div>
+            </div>
+
+            <!-- Product 7 (Variant) -->
+            <div class="product-card"
+                onclick="openModal('vape2', 'Disposable', 'Berry Blast 5000', '$19.99', 'A mix of wild berries for a tart and sweet experience. Perfect for all-day vaping.', 'Puffs: 5000', 'Flavor: Mixed Berry')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape2.png') }}" alt="Berry Blast 5000"
+                        style="filter: hue-rotate(45deg);">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Disposable</span>
+                    <h3 class="product-title">Berry Blast 5000</h3>
+                    <span class="product-price">$19.99</span>
+                    <button class="add-to-cart">View Details</button>
+                </div>
+            </div>
+
+            <!-- Product 8 (Variant) -->
+            <div class="product-card"
+                onclick="openModal('vape1', 'Pod System', 'Cyber Vape X1 Red', '$49.99', 'The classic X1 in a striking red finish. Same great performance, bolder look.', 'Color: Crimson Red', 'Battery: 1000mAh')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape1.png') }}" alt="Cyber Vape X1 Red"
+                        style="filter: hue-rotate(150deg);">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Pod System</span>
+                    <h3 class="product-title">Cyber Vape X1 Red</h3>
+                    <span class="product-price">$49.99</span>
+                    <button class="add-to-cart">View Details</button>
+                </div>
+            </div>
+
+            <!-- Product 9 -->
+            <div class="product-card"
+                onclick="openModal('vape6', 'Pod System', 'Quantum Pod', '$59.99', 'Quantum leaps in vaping technology. Features a holographic finish and AI-driven power management for the perfect puff.', 'AI Chip: Gen 3', 'Finish: Holographic')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape6.png') }}" alt="Quantum Pod"
+                        style="filter: hue-rotate(270deg) brightness(1.2);">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Pod System</span>
+                    <h3 class="product-title">Quantum Pod</h3>
+                    <span class="product-price">$59.99</span>
+                    <button class="add-to-cart">View Details</button>
+                </div>
+            </div>
+
+            <!-- Product 10 -->
+            <div class="product-card"
+                onclick="openModal('vape3', 'Box Mod', 'Stealth Mod', '$94.99', 'Silent but powerful. The Stealth Mod features a matte black finish and silent airflow technology for discreet vaping.', 'Noise: <10db', 'Finish: Matte Black')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape3.png') }}" alt="Stealth Mod"
+                        style="filter: grayscale(100%) contrast(1.2);">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Box Mod</span>
+                    <h3 class="product-title">Stealth Mod</h3>
+                    <span class="product-price">$94.99</span>
+                    <button class="add-to-cart">View Details</button>
+                </div>
+            </div>
+
+            <!-- Product 11 -->
+            <div class="product-card"
+                onclick="openModal('vape2', 'Disposable', 'Nebula Stick', '$22.99', 'Taste the galaxy with the Nebula Stick. A cosmic blend of grape, blueberry, and cooling menthol.', 'Puffs: 5500', 'Flavor: Cosmic Berry')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape2.png') }}" alt="Nebula Stick"
+                        style="filter: hue-rotate(200deg) saturate(1.5);">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Disposable</span>
+                    <h3 class="product-title">Nebula Stick</h3>
+                    <span class="product-price">$22.99</span>
+                    <button class="add-to-cart">View Details</button>
+                </div>
+            </div>
+
+            <!-- Product 12 -->
+            <div class="product-card"
+                onclick="openModal('vape5', 'Luxury Mod', 'Iron Fist', '$110.00', 'Built like a tank. The Iron Fist is shockproof, dustproof, and waterproof, designed for the most extreme conditions.', 'Rating: IP68', 'Material: Reinforced Steel')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape5.png') }}" alt="Iron Fist"
+                        style="filter: sepia(0.5) contrast(1.1);">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Luxury Mod</span>
+                    <h3 class="product-title">Iron Fist</h3>
+                    <span class="product-price">$110.00</span>
+                    <button class="add-to-cart">View Details</button>
+                </div>
+            </div>
+
+            <!-- Product 13 -->
+            <div class="product-card"
+                onclick="openModal('vape4', 'Pod System', 'Neon Pulse', '$34.99', 'Light up the night. The Neon Pulse features dynamic LED lighting that pulses with your music or vaping rhythm.', 'Lighting: Audio Reactive', 'Battery: 900mAh')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape4.png') }}" alt="Neon Pulse"
+                        style="filter: hue-rotate(90deg) brightness(1.1);">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Pod System</span>
+                    <h3 class="product-title">Neon Pulse</h3>
+                    <span class="product-price">$34.99</span>
+                    <button class="add-to-cart">View Details</button>
+                </div>
+            </div>
+
+            <!-- Product 14 -->
+            <div class="product-card"
+                onclick="openModal('vape3', 'Box Mod', 'Titanium Tank', '$105.00', 'Industrial strength. Machined from solid titanium for a lightweight yet incredibly strong chassis.', 'Material: Grade 5 Titanium', 'Weight: Ultra Light')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape3.png') }}" alt="Titanium Tank"
+                        style="filter: grayscale(100%) sepia(20%) brightness(0.9);">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Box Mod</span>
+                    <h3 class="product-title">Titanium Tank</h3>
+                    <span class="product-price">$105.00</span>
+                    <button class="add-to-cart">View Details</button>
+                </div>
+            </div>
+
+            <!-- Product 15 -->
+            <div class="product-card"
+                onclick="openModal('vape2', 'Disposable', 'Frost Bite', '$18.99', 'Chillingly good. An extreme menthol blast paired with crisp white peach for a refreshing experience.', 'Cooling: High', 'Puffs: 4500')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape2.png') }}" alt="Frost Bite"
+                        style="filter: hue-rotate(180deg) brightness(1.3);">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Disposable</span>
+                    <h3 class="product-title">Frost Bite</h3>
+                    <span class="product-price">$18.99</span>
+                    <button class="add-to-cart">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Product Modal -->
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-body">
+            <div class="modal-image">
+                <img id="modalImg" src="" alt="Product Image">
+            </div>
+            <div class="modal-details">
+                <span id="modalCategory" class="modal-category">Category</span>
+                <h2 id="modalTitle" class="modal-title">Product Name</h2>
+                <span id="modalPrice" class="modal-price">$0.00</span>
+                <p id="modalDesc" class="modal-description">Description goes here...</p>
+
+                <div class="modal-specs">
+                    <div class="spec-item">
+                        <span class="spec-label">Spec 1</span>
+                        <span id="modalSpec1" class="spec-value">Value</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Spec 2</span>
+                        <span id="modalSpec2" class="spec-value">Value</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" data-i18n="btn_add">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Modal Logic
+    const modal = document.getElementById('productModal');
+    const modalImg = document.getElementById('modalImg');
+    const modalCategory = document.getElementById('modalCategory');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalSpec1 = document.getElementById('modalSpec1');
+    const modalSpec2 = document.getElementById('modalSpec2');
+
+    // Product Translations
+    const productTranslations = {
+        'vape1': {
+            en: { category: 'Pod System', title: 'Cyber Vape X1', desc: 'Experience the future with the Cyber Vape X1. Featuring a sleek metallic finish and advanced coil technology for pure flavor.', spec1: 'Battery: 1000mAh', spec2: 'Capacity: 2ml' },
+            es: { category: 'Sistema Pod', title: 'Cyber Vape X1', desc: 'Experimenta el futuro con el Cyber Vape X1. Con un acabado metálico elegante y tecnología de bobina avanzada para un sabor puro.', spec1: 'Batería: 1000mAh', spec2: 'Capacidad: 2ml' }
+        },
+        'vape2': {
+            en: { category: 'Disposable', title: 'Fruit Blast 5000', desc: 'Explosion of tropical fruits in every puff. The Fruit Blast 5000 offers up to 5000 puffs of consistent, intense flavor.', spec1: 'Puffs: 5000', spec2: 'Nicotine: 5%' },
+            es: { category: 'Desechable', title: 'Fruit Blast 5000', desc: 'Explosión de frutas tropicales en cada calada. El Fruit Blast 5000 ofrece hasta 5000 caladas de sabor consistente e intenso.', spec1: 'Caladas: 5000', spec2: 'Nicotina: 5%' }
+        },
+        'vape3': {
+            en: { category: 'Box Mod', title: 'Titan Mod 200W', desc: 'Power meets durability. The Titan Mod 200W is built for cloud chasers who demand the best performance and rugged build quality.', spec1: 'Power: 5-200W', spec2: 'Battery: Dual 18650' },
+            es: { category: 'Mod Box', title: 'Titan Mod 200W', desc: 'Potencia y durabilidad. El Titan Mod 200W está construido para cazadores de nubes que exigen el mejor rendimiento y calidad de construcción robusta.', spec1: 'Potencia: 5-200W', spec2: 'Batería: Dual 18650' }
+        },
+        'vape4': {
+            en: { category: 'Disposable', title: 'Pastel Dream', desc: 'Soft, sweet, and satisfying. Pastel Dream brings a dessert-inspired profile with notes of vanilla and strawberry cream.', spec1: 'Puffs: 6000', spec2: 'Nicotine: 3%' },
+            es: { category: 'Desechable', title: 'Pastel Dream', desc: 'Suave, dulce y satisfactorio. Pastel Dream trae un perfil inspirado en postres con notas de vainilla y crema de fresa.', spec1: 'Caladas: 6000', spec2: 'Nicotina: 3%' }
+        },
+        'vape5': {
+            en: { category: 'Luxury Mod', title: 'Gold Edition Pro', desc: 'The ultimate statement piece. 24k gold plating accents meet high-end chipset performance. Limited edition.', spec1: 'Material: Zinc Alloy/Gold', spec2: 'Chipset: DNA 250C' },
+            es: { category: 'Mod de Lujo', title: 'Gold Edition Pro', desc: 'La pieza de declaración definitiva. Acentos chapados en oro de 24k se encuentran con el rendimiento de chipset de alta gama. Edición limitada.', spec1: 'Material: Aleación Zinc/Oro', spec2: 'Chipset: DNA 250C' }
+        },
+        'vape6': {
+            en: { category: 'Pod System', title: 'Cyber Clear', desc: 'See the technology inside. Transparent casing reveals the advanced circuitry while neon LEDs light up your vape session.', spec1: 'Lighting: RGB LED', spec2: 'Coils: Mesh 0.8ohm' },
+            es: { category: 'Sistema Pod', title: 'Cyber Clear', desc: 'Mira la tecnología en el interior. La carcasa transparente revela los circuitos avanzados mientras los LED de neón iluminan tu sesión de vapeo.', spec1: 'Iluminación: LED RGB', spec2: 'Bobinas: Malla 0.8ohm' }
+        }
+    };
+
+    function openModal(imgId, category, title, price, desc, spec1, spec2) {
+        // Get image source logic (same as before)
+        let sourceImg = null;
+        if (window.event) {
+            const card = window.event.target.closest('.product-card');
+            if (card) {
+                sourceImg = card.querySelector('img');
+            }
+        }
+
+        if (!sourceImg) {
+            sourceImg = document.getElementById('img-' + imgId);
+        }
+
+        if (sourceImg) {
+            modalImg.src = sourceImg.src;
+            const style = window.getComputedStyle(sourceImg);
+            modalImg.style.filter = style.filter;
+        } else {
+            modalImg.style.filter = 'none';
+        }
+
+        // Localization Logic
+        const currentLang = localStorage.getItem('puffelaxLang') || 'en';
+        let t = { category, title, desc, spec1, spec2 }; // Default to passed args
+
+        // Check if translation exists for this ID
+        if (productTranslations[imgId] && productTranslations[imgId][currentLang]) {
+            t = productTranslations[imgId][currentLang];
+        }
+
+        modalCategory.textContent = t.category;
+        modalTitle.textContent = t.title;
+        modalPrice.textContent = price;
+        modalDesc.textContent = t.desc;
+
+        // Split spec strings "Label: Value"
+        const s1 = t.spec1.split(':');
+        const s2 = t.spec2.split(':');
+
+        if (s1.length > 1) {
+            document.querySelector('.modal-specs .spec-item:nth-child(1) .spec-label').textContent = s1[0];
+            modalSpec1.textContent = s1[1];
+        } else {
+            modalSpec1.textContent = t.spec1;
+        }
+
+        if (s2.length > 1) {
+            document.querySelector('.modal-specs .spec-item:nth-child(2) .spec-label').textContent = s2[0];
+            modalSpec2.textContent = s2[1];
+        } else {
+            modalSpec2.textContent = t.spec2;
+        }
+
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+
+        // Update Add to Cart button in modal
+        const addToCartBtn = document.querySelector('.modal-body .btn-primary');
+
+        // Ensure button text is translated when modal opens
+        if (translations && translations[currentLang] && translations[currentLang]['btn_add']) {
+            addToCartBtn.textContent = translations[currentLang]['btn_add'];
+        }
+
+        addToCartBtn.onclick = function () {
+            addToCart(t.title, price);
+            closeModal();
+        };
+    }
+
+    function closeModal() {
+        modal.classList.remove('show');
+        document.body.style.overflow = 'auto';
+    }
+
+    // Close on outside click
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            closeModal();
+        }
+    });
+</script>
+{% endblock %}

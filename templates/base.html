@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Puffelax - Premium Vapes{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/toast.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="{{ url_for('home') }}" class="logo">PUFFELAX</a>
+                <ul class="nav-links">
+                    <li><a href="#" data-i18n="nav_disposable">Disposable</a></li>
+                    <li><a href="#" data-i18n="nav_pods">Pods</a></li>
+                    <li><a href="#" data-i18n="nav_eliquids">eLiquids</a></li>
+                    <li><a href="#" data-i18n="nav_vapekits">Vape Kits</a></li>
+                    <li><a href="#" data-i18n="nav_coils">Coils</a></li>
+                    <li><a href="#" data-i18n="nav_cbd">CBD</a></li>
+                    <li><a href="#" data-i18n="nav_pouches">Pouches</a></li>
+                    <li><a href="#" data-i18n="nav_snacks">Snacks</a></li>
+                    <li><a href="#" data-i18n="nav_account" onclick="openAccountModal()">Account</a></li>
+                </ul>
+                <div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
+                    <a href="{{ url_for('checkout') }}" class="btn btn-primary" id="cart-btn">Cart (0)</a>
+                    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <div class="mobile-menu-header">
+                <span class="logo">PUFFELAX</span>
+                <span class="close-menu" onclick="toggleMobileMenu()">&times;</span>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="#" data-i18n="nav_disposable" onclick="toggleMobileMenu()">Disposable</a></li>
+                <li><a href="#" data-i18n="nav_pods" onclick="toggleMobileMenu()">Pods</a></li>
+                <li><a href="#" data-i18n="nav_eliquids" onclick="toggleMobileMenu()">eLiquids</a></li>
+                <li><a href="#" data-i18n="nav_vapekits" onclick="toggleMobileMenu()">Vape Kits</a></li>
+                <li><a href="#" data-i18n="nav_coils" onclick="toggleMobileMenu()">Coils</a></li>
+                <li><a href="#" data-i18n="nav_cbd" onclick="toggleMobileMenu()">CBD</a></li>
+                <li><a href="#" data-i18n="nav_pouches" onclick="toggleMobileMenu()">Pouches</a></li>
+                <li><a href="#" data-i18n="nav_snacks" onclick="toggleMobileMenu()">Snacks</a></li>
+                <li><a href="#" data-i18n="nav_account" onclick="toggleMobileMenu(); openAccountModal()">Account</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>PUFFELAX</h4>
+                    <p data-i18n="footer_desc">Premium vaping experience for the modern lifestyle. Quality, style, and
+                        satisfaction guaranteed.
+                    </p>
+                    <button id="lang-toggle" class="btn"
+                        style="margin-top: 15px; padding: 8px 20px; border: 1px solid var(--glass-border); background: transparent; color: var(--text-color); font-size: 0.9rem;"
+                        onclick="toggleLanguage()">ES</button>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer_shop">Shop</h4>
+                    <ul>
+                        <li><a href="#" data-i18n="footer_all">All Products</a></li>
+                        <li><a href="#" data-i18n="footer_new">New Arrivals</a></li>
+                        <li><a href="#" data-i18n="footer_best">Best Sellers</a></li>
+                        <li><a href="#" data-i18n="footer_acc">Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer_support">Support</h4>
+                    <ul>
+                        <li><a href="#" data-i18n="footer_faq">FAQ</a></li>
+                        <li><a href="#" data-i18n="footer_ship">Shipping</a></li>
+                        <li><a href="#" data-i18n="footer_ret">Returns</a></li>
+                        <li><a href="#" data-i18n="footer_cont">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer_follow">Follow Us</h4>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p data-i18n="footer_copy">&copy; 2027 Puffelax. All rights reserved By OBi. 18+ Only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Account Modal -->
+    <div id="accountModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <span class="close" onclick="closeAccountModal()">&times;</span>
+            <div class="modal-body" style="flex-direction: column; padding: 40px;">
+                <h2 style="text-align: center; margin-bottom: 30px;" data-i18n="acc_create_title">Create Account</h2>
+                <form onsubmit="handleRegister(event)" style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="form-group">
+                        <label for="reg-name" data-i18n="lbl_name">Full Name</label>
+                        <input type="text" id="reg-name" required
+                            style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.02);">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email" data-i18n="lbl_email">Email</label>
+                        <input type="email" id="reg-email" required
+                            style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.02);">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-pass" data-i18n="lbl_pass">Password</label>
+                        <input type="password" id="reg-pass" required
+                            style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.02);">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;"
+                        data-i18n="btn_register">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        // Translation Dictionary
+        const translations = {
+            en: {
+                nav_home: "Home",
+                nav_shop: "Shop",
+                nav_about: "About",
+                nav_contact: "Contact",
+                nav_cart: "Cart",
+                nav_disposable: "Disposable",
+                nav_pods: "Pods",
+                nav_eliquids: "eLiquids",
+                nav_vapekits: "Vape Kits",
+                nav_coils: "Coils",
+                nav_cbd: "CBD",
+                nav_pouches: "Pouches",
+                nav_snacks: "Snacks",
+                nav_account: "Account",
+                footer_desc: "Premium vaping experience for the modern lifestyle. Quality, style, and satisfaction guaranteed.",
+                footer_shop: "Shop",
+                footer_all: "All Products",
+                footer_new: "New Arrivals",
+                footer_best: "Best Sellers",
+                footer_acc: "Accessories",
+                footer_support: "Support",
+                footer_faq: "FAQ",
+                footer_ship: "Shipping",
+                footer_ret: "Returns",
+                footer_cont: "Contact Us",
+                footer_follow: "Follow Us",
+                footer_copy: "&copy; 2027 Puffelax. All rights reserved By OBi. 18+ Only.",
+                // Checkout
+                checkout_title: "Checkout",
+                your_order: "Your Order",
+                empty_cart: "Your cart is empty.",
+                total: "Total:",
+                shipping_details: "Shipping Details",
+                lbl_name: "Full Name",
+                lbl_email: "Email",
+                lbl_addr: "Address",
+                lbl_city: "City",
+                lbl_zip: "Zip Code",
+                payment_method: "Payment Method",
+                pay_card: "Credit Card",
+                pay_apple: "Pay with Apple Pay",
+                pay_google: "Pay with Google Pay",
+                pay_paypal: "Pay with PayPal",
+                lbl_card: "Card Number",
+                lbl_expiry: "Expiry",
+                lbl_cvc: "CVC",
+                btn_complete: "Complete Purchase",
+                // Index/Products
+                hero_title: "ELEVATE YOUR <span>VAPING EXPERIENCE</span>",
+                hero_sub: "Discover the future of vaping with our premium collection of devices and flavors. Engineered for satisfaction, designed for style.",
+                btn_shop: "Shop Now",
+                feat_fast: "Fast Charging",
+                feat_fast_desc: "Get back to full power in minutes with our advanced USB-C charging technology.",
+                feat_flow: "Smooth Airflow",
+                feat_flow_desc: "Precision-engineered airflow systems for the perfect draw every time.",
+                feat_qual: "Premium Quality",
+                feat_qual_desc: "Built with medical-grade materials and tested for safety and durability.",
+                sect_feat: "Featured Products",
+                sect_prem: "Premium Collection",
+                btn_add: "Add to Cart",
+                btn_add: "Add to Cart",
+                btn_view: "View Details",
+                // Modals
+                about_title: "About Puffelax",
+                about_content: "Puffelax was founded with a simple mission: to provide the highest quality vaping products to enthusiasts around the world. We believe in innovation, safety, and style. Our team of experts carefully curates every product to ensure it meets our rigorous standards. Join the Puffelax community and experience the difference.",
+                contact_title: "Contact Us",
+                contact_content: "Have questions? We're here to help!<br><br><strong>Email:</strong> support@puffelax.com<br><strong>Phone:</strong> +1 (555) 123-4567<br><strong>Address:</strong> 123 Vaping Blvd, Cloud City, CA 90210<br><br>Our support team is available Monday through Friday, 9am to 5pm PST.",
+                // Account
+                acc_create_title: "Create Account",
+                lbl_pass: "Password",
+                btn_register: "Create Account"
+            },
+            es: {
+                nav_home: "Inicio",
+                nav_shop: "Tienda",
+                nav_about: "Nosotros",
+                nav_contact: "Contacto",
+                nav_cart: "Carrito",
+                nav_disposable: "Desechables",
+                nav_pods: "Pods",
+                nav_eliquids: "eLíquidos",
+                nav_vapekits: "Kits de Vapeo",
+                nav_coils: "Resistencias",
+                nav_cbd: "CBD",
+                nav_pouches: "Bolsas",
+                nav_snacks: "Snacks",
+                nav_account: "Cuenta",
+                footer_desc: "Experiencia de vapeo premium para el estilo de vida moderno. Calidad, estilo y satisfacción garantizados.",
+                footer_shop: "Tienda",
+                footer_all: "Todos los Productos",
+                footer_new: "Nuevos Arrivos",
+                footer_best: "Más Vendidos",
+                footer_acc: "Accesorios",
+                footer_support: "Soporte",
+                footer_faq: "Preguntas Frecuentes",
+                footer_ship: "Envíos",
+                footer_ret: "Devoluciones",
+                footer_cont: "Contáctanos",
+                footer_follow: "Síguenos",
+                footer_copy: "&copy; 2027 Puffelax. Todos los derechos reservados por OBi. Solo +18.",
+                // Checkout
+                checkout_title: "Finalizar Compra",
+                your_order: "Tu Pedido",
+                empty_cart: "Tu carrito está vacío.",
+                total: "Total:",
+                shipping_details: "Detalles de Envío",
+                lbl_name: "Nombre Completo",
+                lbl_email: "Correo Electrónico",
+                lbl_addr: "Dirección",
+                lbl_city: "Ciudad",
+                lbl_zip: "Código Postal",
+                payment_method: "Método de Pago",
+                pay_card: "Tarjeta de Crédito",
+                pay_apple: "Pagar con Apple Pay",
+                pay_google: "Pagar con Google Pay",
+                pay_paypal: "Pagar con PayPal",
+                lbl_card: "Número de Tarjeta",
+                lbl_expiry: "Vencimiento",
+                lbl_cvc: "CVC",
+                btn_complete: "Completar Compra",
+                // Index/Products
+                hero_title: "ELEVA TU <span>EXPERIENCIA DE VAPEO</span>",
+                hero_sub: "Descubre el futuro del vapeo con nuestra colección premium de dispositivos y sabores. Diseñados para la satisfacción y el estilo.",
+                btn_shop: "Comprar Ahora",
+                feat_fast: "Carga Rápida",
+                feat_fast_desc: "Vuelve a la potencia máxima en minutos con nuestra avanzada tecnología de carga USB-C.",
+                feat_flow: "Flujo de Aire Suave",
+                feat_flow_desc: "Sistemas de flujo de aire diseñados con precisión para la calada perfecta cada vez.",
+                feat_qual: "Calidad Premium",
+                feat_qual_desc: "Construido con materiales de grado médico y probado para seguridad y durabilidad.",
+                sect_feat: "Productos Destacados",
+                sect_prem: "Colección Premium",
+                btn_add: "Añadir al Carrito",
+                btn_add: "Añadir al Carrito",
+                btn_view: "Ver Detalles",
+                // Modals
+                about_title: "Sobre Puffelax",
+                about_content: "Puffelax fue fundado con una misión simple: proporcionar productos de vapeo de la más alta calidad a entusiastas de todo el mundo. Creemos en la innovación, la seguridad y el estilo. Nuestro equipo de expertos cura cuidadosamente cada producto para asegurar que cumpla con nuestros rigurosos estándares. Únete a la comunidad Puffelax y experimenta la diferencia.",
+                contact_title: "Contáctanos",
+                contact_content: "¿Tienes preguntas? ¡Estamos aquí para ayudar!<br><br><strong>Correo:</strong> support@puffelax.com<br><strong>Teléfono:</strong> +1 (555) 123-4567<br><strong>Dirección:</strong> 123 Vaping Blvd, Cloud City, CA 90210<br><br>Nuestro equipo de soporte está disponible de lunes a viernes, de 9am a 5pm PST.",
+                // Account
+                acc_create_title: "Crear Cuenta",
+                lbl_pass: "Contraseña",
+                btn_register: "Crear Cuenta"
+            }
+        };
+
+        let currentLang = localStorage.getItem('puffelaxLang') || 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('puffelaxLang', lang);
+
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    if (el.tagName === 'INPUT') {
+                        el.placeholder = translations[lang][key];
+                    } else {
+                        el.innerHTML = translations[lang][key];
+                    }
+                }
+            });
+
+            // Update Cart Button
+            updateCartUI();
+
+            // Update Toggle Button Text
+            const toggleBtn = document.getElementById('lang-toggle');
+            if (toggleBtn) toggleBtn.textContent = lang === 'en' ? 'ES' : 'EN';
+        }
+
+        function toggleLanguage() {
+            setLanguage(currentLang === 'en' ? 'es' : 'en');
+        }
+
+        // Toast Notification System
+        function showToast(title, message, duration = 3000) {
+            const container = document.getElementById('toast-container');
+
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `
+                <div class="toast-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="toast-content">
+                    <div class="toast-title">${title}</div>
+                    <div class="toast-message">${message}</div>
+                </div>
+            `;
+
+            container.appendChild(toast);
+
+            // Trigger animation
+            setTimeout(() => toast.classList.add('show'), 10);
+
+            // Remove after duration
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 400);
+            }, duration);
+        }
+
+        // Global Cart Logic
+        function getCart() {
+            return JSON.parse(localStorage.getItem('puffelaxCart')) || [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('puffelaxCart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function addToCart(name, price) {
+            const cart = getCart();
+            cart.push({ name, price });
+            saveCart(cart);
+            const msg = currentLang === 'en' ? 'Added to Cart!' : '¡Añadido al Carrito!';
+            showToast(msg, `${name} - ${price}`);
+        }
+
+        function updateCartUI() {
+            const cart = getCart();
+            const btn = document.getElementById('cart-btn');
+            if (btn) {
+                const text = currentLang === 'en' ? 'Cart' : 'Carrito';
+                btn.textContent = `${text} (${cart.length})`;
+            }
+        }
+
+
+
+        // Mobile Menu Logic
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('active');
+
+            if (menu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Add a global listener for clicks to handle multiple modals if they exist
+        window.addEventListener('click', function (event) {
+            const infoModal = document.getElementById('infoModal'); // Define infoModal here
+            if (event.target == infoModal) {
+                closeInfoModal();
+            }
+            if (event.target == document.getElementById('accountModal')) {
+                closeAccountModal();
+            }
+        });
+
+        // Account Modal Logic
+        const accountModal = document.getElementById('accountModal');
+
+        function openAccountModal() {
+            accountModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAccountModal() {
+            accountModal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('reg-name').value;
+            // Mock registration
+            closeAccountModal();
+            const msg = currentLang === 'en' ? 'Account Created!' : '¡Cuenta Creada!';
+            const sub = currentLang === 'en' ? `Welcome, ${name}` : `Bienvenido, ${name}`;
+            showToast(msg, sub);
+
+            // Clear form
+            e.target.reset();
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            setLanguage(currentLang);
+            updateCartUI();
+            // Assuming there's an element with data-i18n="nav_account" that should open the modal
+            // This part is not in the provided snippet, but would be a typical way to link it.
+            // Example:
+            // const accountNav = document.querySelector('[data-i18n="nav_account"]');
+            // if (accountNav) {
+            //     accountNav.addEventListener('click', (e) => {
+            //         e.preventDefault();
+            //         openAccountModal();
+            //     });
+            // }
+        });
+        // Close on Escape key
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                const accountModal = document.getElementById('accountModal');
+                if (accountModal && accountModal.classList.contains('show')) {
+                    closeAccountModal();
+                }
+
+                // Also close info modal if open
+                const infoModal = document.getElementById('infoModal');
+                if (infoModal && infoModal.classList.contains('show')) {
+                    closeInfoModal();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
+```

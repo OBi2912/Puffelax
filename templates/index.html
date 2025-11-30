@@ -1,0 +1,268 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 data-i18n="hero_title">ELEVATE YOUR <span>VAPING EXPERIENCE</span></h1>
+            <p data-i18n="hero_sub">Discover the future of vaping with our premium collection of devices and flavors.
+                Engineered for
+                satisfaction, designed for style.</p>
+            <a href="{{ url_for('products') }}" class="btn btn-primary" data-i18n="btn_shop">Shop Now</a>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                <h3 data-i18n="feat_fast">Fast Charging</h3>
+                <p data-i18n="feat_fast_desc">Get back to full power in minutes with our advanced USB-C charging
+                    technology.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fas fa-wind"></i></div>
+                <h3 data-i18n="feat_flow">Smooth Airflow</h3>
+                <p data-i18n="feat_flow_desc">Precision-engineered airflow systems for the perfect draw every time.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3 data-i18n="feat_qual">Premium Quality</h3>
+                <p data-i18n="feat_qual_desc">Built with medical-grade materials and tested for safety and durability.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="products">
+    <div class="container">
+        <h2 class="section-title" data-i18n="sect_feat">Featured Products</h2>
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card"
+                onclick="openProductModal('vape1', 'Pod System', 'Cyber Vape X1', '$49.99', 'Experience the future with the Cyber Vape X1. Featuring a sleek metallic finish and advanced coil technology for pure flavor.', 'Battery: 1000mAh', 'Capacity: 2ml')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape1.png') }}" alt="Cyber Vape X1" id="img-vape1">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Pod System</span>
+                    <h3 class="product-title">Cyber Vape X1</h3>
+                    <span class="product-price">$49.99</span>
+                    <button class="add-to-cart"
+                        onclick="event.stopPropagation(); addToCart('Cyber Vape X1', '$49.99')">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card"
+                onclick="openProductModal('vape2', 'Disposable', 'Fruit Blast 5000', '$19.99', 'Explosion of tropical fruits in every puff. The Fruit Blast 5000 offers up to 5000 puffs of consistent, intense flavor.', 'Puffs: 5000', 'Nicotine: 5%')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape2.png') }}" alt="Fruit Blast Disposable"
+                        id="img-vape2">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Disposable</span>
+                    <h3 class="product-title">Fruit Blast 5000</h3>
+                    <span class="product-price">$19.99</span>
+                    <button class="add-to-cart"
+                        onclick="event.stopPropagation(); addToCart('Fruit Blast 5000', '$19.99')">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card"
+                onclick="openProductModal('vape3', 'Box Mod', 'Titan Mod 200W', '$89.99', 'Power meets durability. The Titan Mod 200W is built for cloud chasers who demand the best performance and rugged build quality.', 'Power: 5-200W', 'Battery: Dual 18650')">
+                <div class="product-image">
+                    <img src="{{ url_for('static', filename='images/vape3.png') }}" alt="Titan Mod 200W" id="img-vape3">
+                </div>
+                <div class="product-info">
+                    <span class="product-category">Box Mod</span>
+                    <h3 class="product-title">Titan Mod 200W</h3>
+                    <span class="product-price">$89.99</span>
+                    <button class="add-to-cart"
+                        onclick="event.stopPropagation(); addToCart('Titan Mod 200W', '$89.99')">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="about-section" style="padding: 100px 0; background-color: #f9f9f9;">
+    <div class="container">
+        <h2 class="section-title" data-i18n="about_title">About Puffelax</h2>
+        <div class="about-content" style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <p data-i18n="about_content" style="font-size: 1.1rem; color: #555; line-height: 1.8;">
+                Puffelax was founded with a simple mission: to provide the highest quality vaping products to
+                enthusiasts around the world. We believe in innovation, safety, and style. Our team of experts carefully
+                curates every product to ensure it meets our rigorous standards. Join the Puffelax community and
+                experience the difference.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="contact-section" style="padding: 100px 0;">
+    <div class="container">
+        <h2 class="section-title" data-i18n="contact_title">Contact Us</h2>
+        <div class="contact-content" style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <p data-i18n="contact_content" style="font-size: 1.1rem; color: #555; line-height: 1.8;">
+                Have questions? We're here to help!<br><br><strong>Email:</strong>
+                support@puffelax.com<br><strong>Phone:</strong> +1 (555) 123-4567<br><strong>Address:</strong> 123
+                Vaping Blvd, Cloud City, CA 90210<br><br>Our support team is available Monday through Friday, 9am to 5pm
+                PST.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Product Modal -->
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeProductModal()">&times;</span>
+        <div class="modal-body">
+            <div class="modal-image">
+                <img id="modalImg" src="" alt="Product Image">
+            </div>
+            <div class="modal-details">
+                <span id="modalCategory" class="modal-category">Category</span>
+                <h2 id="modalTitle" class="modal-title">Product Name</h2>
+                <span id="modalPrice" class="modal-price">$0.00</span>
+                <p id="modalDesc" class="modal-description">Description goes here...</p>
+
+                <div class="modal-specs">
+                    <div class="spec-item">
+                        <span class="spec-label">Spec 1</span>
+                        <span id="modalSpec1" class="spec-value">Value</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Spec 2</span>
+                        <span id="modalSpec2" class="spec-value">Value</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" id="modal-add-cart" data-i18n="btn_add">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Modal Logic for Homepage
+    const modal = document.getElementById('productModal');
+    const modalImg = document.getElementById('modalImg');
+    const modalCategory = document.getElementById('modalCategory');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalSpec1 = document.getElementById('modalSpec1');
+    const modalSpec2 = document.getElementById('modalSpec2');
+
+    // Product Translations
+    const productTranslations = {
+        'vape1': {
+            en: { category: 'Pod System', title: 'Cyber Vape X1', desc: 'Experience the future with the Cyber Vape X1. Featuring a sleek metallic finish and advanced coil technology for pure flavor.', spec1: 'Battery: 1000mAh', spec2: 'Capacity: 2ml' },
+            es: { category: 'Sistema Pod', title: 'Cyber Vape X1', desc: 'Experimenta el futuro con el Cyber Vape X1. Con un acabado metálico elegante y tecnología de bobina avanzada para un sabor puro.', spec1: 'Batería: 1000mAh', spec2: 'Capacidad: 2ml' }
+        },
+        'vape2': {
+            en: { category: 'Disposable', title: 'Fruit Blast 5000', desc: 'Explosion of tropical fruits in every puff. The Fruit Blast 5000 offers up to 5000 puffs of consistent, intense flavor.', spec1: 'Puffs: 5000', spec2: 'Nicotine: 5%' },
+            es: { category: 'Desechable', title: 'Fruit Blast 5000', desc: 'Explosión de frutas tropicales en cada calada. El Fruit Blast 5000 ofrece hasta 5000 caladas de sabor consistente e intenso.', spec1: 'Caladas: 5000', spec2: 'Nicotina: 5%' }
+        },
+        'vape3': {
+            en: { category: 'Box Mod', title: 'Titan Mod 200W', desc: 'Power meets durability. The Titan Mod 200W is built for cloud chasers who demand the best performance and rugged build quality.', spec1: 'Power: 5-200W', spec2: 'Battery: Dual 18650' },
+            es: { category: 'Mod Box', title: 'Titan Mod 200W', desc: 'Potencia y durabilidad. El Titan Mod 200W está construido para cazadores de nubes que exigen el mejor rendimiento y calidad de construcción robusta.', spec1: 'Potencia: 5-200W', spec2: 'Batería: Dual 18650' }
+        }
+    };
+
+    function openProductModal(imgId, category, title, price, desc, spec1, spec2) {
+        // Get image source
+        let sourceImg = null;
+        if (window.event) {
+            const card = window.event.target.closest('.product-card');
+            if (card) {
+                sourceImg = card.querySelector('img');
+            }
+        }
+
+        if (!sourceImg) {
+            sourceImg = document.getElementById('img-' + imgId);
+        }
+
+        if (sourceImg) {
+            modalImg.src = sourceImg.src;
+            const style = window.getComputedStyle(sourceImg);
+            modalImg.style.filter = style.filter;
+        } else {
+            modalImg.style.filter = 'none';
+        }
+
+        // Localization Logic
+        const currentLang = localStorage.getItem('puffelaxLang') || 'en';
+        let t = { category, title, desc, spec1, spec2 }; // Default to passed args
+
+        if (productTranslations[imgId] && productTranslations[imgId][currentLang]) {
+            t = productTranslations[imgId][currentLang];
+        }
+
+        modalCategory.textContent = t.category;
+        modalTitle.textContent = t.title;
+        modalPrice.textContent = price; // Price usually stays same, or we can add to dict if needed
+        modalDesc.textContent = t.desc;
+
+        // Split spec strings "Label: Value"
+        const s1 = t.spec1.split(':');
+        const s2 = t.spec2.split(':');
+
+        if (s1.length > 1) {
+            document.querySelector('#productModal .modal-specs .spec-item:nth-child(1) .spec-label').textContent = s1[0];
+            modalSpec1.textContent = s1[1];
+        } else {
+            modalSpec1.textContent = t.spec1;
+        }
+
+        if (s2.length > 1) {
+            document.querySelector('#productModal .modal-specs .spec-item:nth-child(2) .spec-label').textContent = s2[0];
+            modalSpec2.textContent = s2[1];
+        } else {
+            modalSpec2.textContent = t.spec2;
+        }
+
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+
+        // Update Add to Cart button in modal
+        const addToCartBtn = document.getElementById('modal-add-cart');
+
+        // Ensure button text is translated when modal opens
+        if (translations && translations[currentLang] && translations[currentLang]['btn_add']) {
+            addToCartBtn.textContent = translations[currentLang]['btn_add'];
+        }
+
+        addToCartBtn.onclick = function () {
+            addToCart(t.title, price);
+            closeProductModal();
+        };
+    }
+
+    function closeProductModal() {
+        modal.classList.remove('show');
+        document.body.style.overflow = 'auto';
+    }
+
+    // Close on outside click
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            closeProductModal();
+        }
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            closeProductModal();
+        }
+    });
+</script>
+{% endblock %}
